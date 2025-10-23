@@ -14,12 +14,14 @@ export default function About() {
             About <span className="gradient-text">VidSnap</span>
           </h1>
           <p className="text-foreground/60 text-lg mb-8">
-            Learn more about our mission, team, and the technology behind the fastest video downloader on the web.
+            Learn more about our mission, team, and the technology behind the
+            fastest video downloader on the web.
           </p>
-          
+
           <div className="bg-card border border-border rounded-xl p-12 mb-8">
             <p className="text-foreground/70 mb-6">
-              This page will showcase our story, team, technology stack, and commitment to providing the best video downloading experience.
+              This page will showcase our story, team, technology stack, and
+              commitment to providing the best video downloading experience.
             </p>
             <p className="text-sm text-foreground/50">
               Coming soon with our full story and team information!

@@ -15,13 +15,14 @@ export default function NotFound() {
               404
             </h1>
           </div>
-          
+
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Page Not Found
           </h2>
-          
+
           <p className="text-foreground/60 text-lg mb-8 max-w-md mx-auto">
-            Oops! The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+            Oops! The page you're looking for doesn't exist or has been moved.
+            Let's get you back on track.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

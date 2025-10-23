@@ -112,7 +112,7 @@ export default {
             transform: "translateY(0)",
           },
         },
-        "glow": {
+        glow: {
           "0%, 100%": {
             "box-shadow": "0 0 20px rgba(168, 85, 247, 0.5)",
           },
@@ -135,12 +135,13 @@ export default {
         "fade-in": "fade-in 0.5s ease-out",
         "slide-up": "slide-up 0.5s ease-out",
         "slide-down": "slide-down 0.5s ease-out",
-        "glow": "glow 3s ease-in-out infinite",
+        glow: "glow 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       backdropBlur: {
         xs: "2px",

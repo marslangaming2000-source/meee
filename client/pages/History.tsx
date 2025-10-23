@@ -14,12 +14,14 @@ export default function History() {
             Download <span className="gradient-text">History</span>
           </h1>
           <p className="text-foreground/60 text-lg mb-8">
-            Track and manage all your past downloads, view statistics, and revisit your download history with ease.
+            Track and manage all your past downloads, view statistics, and
+            revisit your download history with ease.
           </p>
-          
+
           <div className="bg-card border border-border rounded-xl p-12 mb-8">
             <p className="text-foreground/70 mb-6">
-              This page will soon feature a complete download history with filters, search, and management options.
+              This page will soon feature a complete download history with
+              filters, search, and management options.
             </p>
             <p className="text-sm text-foreground/50">
               Check back soon for the full implementation!

@@ -33,7 +33,8 @@ export default function Dashboard() {
       size: "520 MB",
       duration: "1:23:45",
       date: "Today",
-      thumbnail: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&h=180&fit=crop",
+      thumbnail:
+        "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&h=180&fit=crop",
       quality: "1080p",
       status: "completed",
     },
@@ -44,7 +45,8 @@ export default function Dashboard() {
       size: "85 MB",
       duration: "3:45",
       date: "Yesterday",
-      thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=300&h=180&fit=crop",
+      thumbnail:
+        "https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=300&h=180&fit=crop",
       quality: "720p",
       status: "completed",
     },
@@ -55,7 +57,8 @@ export default function Dashboard() {
       size: "45 MB",
       duration: "0:45",
       date: "2 days ago",
-      thumbnail: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=300&h=180&fit=crop",
+      thumbnail:
+        "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=300&h=180&fit=crop",
       quality: "480p",
       status: "completed",
     },
@@ -108,7 +111,9 @@ export default function Dashboard() {
           <div className="p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-foreground/60 text-sm mb-2">Total Downloads</p>
+                <p className="text-foreground/60 text-sm mb-2">
+                  Total Downloads
+                </p>
                 <p className="text-3xl font-bold">{downloads.length}</p>
               </div>
               <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white">
@@ -120,7 +125,9 @@ export default function Dashboard() {
           <div className="p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-foreground/60 text-sm mb-2">Total Storage Used</p>
+                <p className="text-foreground/60 text-sm mb-2">
+                  Total Storage Used
+                </p>
                 <p className="text-3xl font-bold">{formatBytes(totalSize)}</p>
               </div>
               <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-white">
@@ -147,9 +154,7 @@ export default function Dashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-foreground/60 text-sm mb-2">This Month</p>
-                <p className="text-3xl font-bold">
-                  {downloads.length}
-                </p>
+                <p className="text-3xl font-bold">{downloads.length}</p>
               </div>
               <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white">
                 <Clock className="w-6 h-6" />
@@ -231,7 +236,9 @@ export default function Dashboard() {
                           </span>
                         </div>
                       </div>
-                      <p className="text-sm text-foreground/50">{download.date}</p>
+                      <p className="text-sm text-foreground/50">
+                        {download.date}
+                      </p>
                     </div>
 
                     {/* Status Bar */}
@@ -240,9 +247,7 @@ export default function Dashboard() {
                         className="bg-gradient-to-r from-primary to-secondary h-full rounded-full transition-all duration-300"
                         style={{
                           width:
-                            download.status === "completed"
-                              ? "100%"
-                              : "60%",
+                            download.status === "completed" ? "100%" : "60%",
                         }}
                       ></div>
                     </div>
@@ -279,7 +284,10 @@ export default function Dashboard() {
               <p className="text-foreground/60 mb-6">
                 Start downloading videos to see them here
               </p>
-              <a href="/" className="text-primary hover:text-secondary transition-colors">
+              <a
+                href="/"
+                className="text-primary hover:text-secondary transition-colors"
+              >
                 Go to homepage →
               </a>
             </div>

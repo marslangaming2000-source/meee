@@ -82,11 +82,7 @@ export function Header() {
             className="md:hidden p-2 hover:bg-secondary/10 rounded-lg transition-colors duration-200"
             aria-label="Toggle menu"
           >
-            {isOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </nav>
