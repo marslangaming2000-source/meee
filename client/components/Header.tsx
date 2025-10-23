@@ -30,7 +30,7 @@ export function Header() {
             </div>
           </div>
           <span className="text-xl font-bold gradient-text hidden sm:inline">
-            VidSnap
+            Y2Tdown
           </span>
         </Link>
 
