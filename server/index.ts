@@ -6,7 +6,12 @@ import {
   handleGetVideoInfo,
   handleDownloadVideo,
   handleVideoHealth,
+  handleGetFile,
+  handleListDownloads,
+  handleDeleteFile,
+  DOWNLOAD_DIR,
 } from "./routes/video";
+import * as path from "path";
 
 export function createServer() {
   const app = express();
@@ -15,6 +20,9 @@ export function createServer() {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  // Serve downloaded files statically
+  app.use("/downloads", express.static(DOWNLOAD_DIR));
 
   // Example API routes
   app.get("/api/ping", (_req, res) => {
@@ -28,6 +36,9 @@ export function createServer() {
   app.get("/api/video/health", handleVideoHealth);
   app.post("/api/video/info", handleGetVideoInfo);
   app.post("/api/video/download", handleDownloadVideo);
+  app.get("/api/video/file/:fileName", handleGetFile);
+  app.get("/api/video/downloads", handleListDownloads);
+  app.delete("/api/video/file/:fileName", handleDeleteFile);
 
   return app;
 }
