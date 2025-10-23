@@ -11,7 +11,7 @@ export default function About() {
       <div className="container mx-auto px-4 py-24">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            About <span className="gradient-text">VidSnap</span>
+            About <span className="gradient-text">Y2Tdown</span>
           </h1>
           <p className="text-foreground/60 text-lg mb-8">
             Learn more about our mission, team, and the technology behind the
