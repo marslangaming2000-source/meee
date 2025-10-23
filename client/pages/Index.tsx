@@ -101,8 +101,14 @@ export default function Index() {
     const [quality, extension] = selectedFormat.split("-");
 
     setIsLoading(true);
+    setError("");
 
     try {
+      toast({
+        title: "Downloading",
+        description: `Starting download of "${videoInfo.title}" at ${quality}...`,
+      });
+
       const response = await fetch("/api/video/download", {
         method: "POST",
         headers: {
@@ -128,21 +134,30 @@ export default function Index() {
         return;
       }
 
-      // Create download link and trigger download
+      // Trigger file download
       const downloadUrl = data.data.downloadUrl;
       const fileName = data.data.fileName;
 
-      // In a real scenario, this would be a direct file download
-      // For now, we'll show a success message
       toast({
         title: "Success",
-        description: `Download prepared: ${fileName}`,
+        description: `Download completed! (${data.data.size})`,
       });
 
-      // Reset form
-      setUrl("");
-      setVideoInfo(null);
-      setSelectedFormat(null);
+      // Download the file
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Reset form after successful download
+      setTimeout(() => {
+        setUrl("");
+        setVideoInfo(null);
+        setSelectedFormat(null);
+        setIsLoading(false);
+      }, 500);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "An error occurred";
       setError(errorMessage);
@@ -151,7 +166,6 @@ export default function Index() {
         description: errorMessage,
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };
