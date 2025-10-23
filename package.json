@@ -26,7 +26,8 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "zod": "^3.25.76",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "yt-dlp-exec": "^1.2.20"
   },
   "devDependencies": {
     "@hookform/resolvers": "^5.2.1",
