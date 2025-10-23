@@ -2,6 +2,11 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import {
+  handleGetVideoInfo,
+  handleDownloadVideo,
+  handleVideoHealth,
+} from "./routes/video";
 
 export function createServer() {
   const app = express();
@@ -18,6 +23,11 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Video downloader API routes
+  app.get("/api/video/health", handleVideoHealth);
+  app.post("/api/video/info", handleGetVideoInfo);
+  app.post("/api/video/download", handleDownloadVideo);
 
   return app;
 }
