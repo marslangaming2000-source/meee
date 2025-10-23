@@ -8,30 +8,152 @@ import {
   Video,
   Sparkles,
   ArrowRight,
-  Check,
   Youtube,
   Instagram,
   TrendingUp,
   Maximize2,
   Clock,
+  AlertCircle,
+  CheckCircle,
 } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+
+interface VideoInfo {
+  title: string;
+  duration: number;
+  thumbnail: string;
+  author: string;
+  platform: string;
+  formats: Array<{
+    quality: string;
+    extension: string;
+    resolution?: string;
+  }>;
+}
 
 export default function Index() {
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [videoInfo, setVideoInfo] = useState<VideoInfo | null>(null);
+  const [selectedFormat, setSelectedFormat] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const { toast } = useToast();
 
-  const handleDownload = async (e: React.FormEvent) => {
+  const handleGetVideoInfo = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!url.trim()) return;
+    if (!url.trim()) {
+      setError("Please enter a valid URL");
+      return;
+    }
 
     setIsLoading(true);
-    // Simulate processing
-    setTimeout(() => {
+    setError("");
+    setVideoInfo(null);
+    setSelectedFormat(null);
+
+    try {
+      const response = await fetch("/api/video/info", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: url.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        setError(data.error || "Failed to fetch video information");
+        toast({
+          title: "Error",
+          description: data.error || "Failed to fetch video information",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      setVideoInfo(data.data);
+      if (data.data.formats && data.data.formats.length > 0) {
+        setSelectedFormat(`${data.data.formats[0].quality}-${data.data.formats[0].extension}`);
+      }
+      toast({
+        title: "Success",
+        description: "Video information loaded successfully",
+      });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!videoInfo || !selectedFormat) return;
+
+    const [quality, extension] = selectedFormat.split("-");
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/video/download", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url: url.trim(),
+          quality,
+          extension,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        setError(data.error || "Failed to download video");
+        toast({
+          title: "Error",
+          description: data.error || "Failed to download video",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      // Create download link and trigger download
+      const downloadUrl = data.data.downloadUrl;
+      const fileName = data.data.fileName;
+
+      // In a real scenario, this would be a direct file download
+      // For now, we'll show a success message
+      toast({
+        title: "Success",
+        description: `Download prepared: ${fileName}`,
+      });
+
       // Reset form
       setUrl("");
-    }, 2000);
+      setVideoInfo(null);
+      setSelectedFormat(null);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const features = [
@@ -134,7 +256,7 @@ export default function Index() {
 
           {/* Download Input Form */}
           <form
-            onSubmit={handleDownload}
+            onSubmit={handleGetVideoInfo}
             className="max-w-2xl mx-auto mb-12 animate-slide-up"
           >
             <div className="relative group">
@@ -145,9 +267,11 @@ export default function Index() {
                     type="url"
                     placeholder="Paste your video URL here..."
                     value={url}
-                    onChange={(e) => setUrl(e.target.value)}
+                    onChange={(e) => {
+                      setUrl(e.target.value);
+                      setError("");
+                    }}
                     className="flex-1 bg-transparent outline-none px-6 py-4 text-foreground placeholder-foreground/50 placeholder:text-sm"
-                    required
                   />
                   <Button
                     type="submit"
@@ -157,22 +281,127 @@ export default function Index() {
                     {isLoading ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        Downloading...
+                        Loading...
                       </>
                     ) : (
                       <>
                         <Download className="w-4 h-4" />
-                        Download
+                        Fetch Info
                       </>
                     )}
                   </Button>
                 </div>
               </div>
             </div>
+            {error && (
+              <div className="flex items-center gap-2 text-destructive text-sm mt-4">
+                <AlertCircle className="w-4 h-4" />
+                {error}
+              </div>
+            )}
             <p className="text-center text-sm text-foreground/50 mt-4">
               Fast • Secure • No Registration • Works with all major platforms
             </p>
           </form>
+
+          {/* Video Info Display */}
+          {videoInfo && (
+            <div className="max-w-2xl mx-auto mb-12 animate-slide-up">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-xl blur opacity-20"></div>
+                <div className="relative bg-card border border-border rounded-xl overflow-hidden">
+                  {/* Thumbnail */}
+                  <div className="relative w-full h-48 md:h-64 bg-foreground/10">
+                    {videoInfo.thumbnail && (
+                      <img
+                        src={videoInfo.thumbnail}
+                        alt={videoInfo.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "https://via.placeholder.com/400x300?text=Video+Thumbnail";
+                        }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                      <Video className="w-12 h-12 text-white/50" />
+                    </div>
+                  </div>
+
+                  {/* Info Content */}
+                  <div className="p-6">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold mb-2">
+                          {videoInfo.title}
+                        </h3>
+                        <div className="flex gap-2 flex-wrap">
+                          <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                            {videoInfo.platform.toUpperCase()}
+                          </span>
+                          <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">
+                            {videoInfo.author}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quality Selection */}
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium mb-3">
+                        Select Quality:
+                      </label>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        {videoInfo.formats.map((format) => {
+                          const formatKey = `${format.quality}-${format.extension}`;
+                          return (
+                            <button
+                              key={formatKey}
+                              onClick={() => setSelectedFormat(formatKey)}
+                              className={`p-3 rounded-lg border transition-all duration-200 text-sm font-medium ${
+                                selectedFormat === formatKey
+                                  ? "gradient-button text-white border-transparent"
+                                  : "bg-foreground/5 border-border hover:border-primary/50"
+                              }`}
+                            >
+                              <div>{format.quality}</div>
+                              <div className="text-xs opacity-75">
+                                {format.extension.toUpperCase()}
+                              </div>
+                              {format.resolution && (
+                                <div className="text-xs opacity-75">
+                                  {format.resolution}
+                                </div>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Download Button */}
+                    <button
+                      onClick={handleDownload}
+                      disabled={isLoading || !selectedFormat}
+                      className="w-full gradient-button px-6 py-3 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50"
+                    >
+                      {isLoading ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <Download className="w-5 h-5" />
+                          Download Video
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Quick Stats */}
           <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto mb-8">
@@ -337,9 +566,9 @@ export default function Index() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-              <Download className="w-5 h-5 text-primary" />
-              <span className="font-bold gradient-text">Y2Tdown</span>
-            </div>
+                <Download className="w-5 h-5 text-primary" />
+                <span className="font-bold gradient-text">Y2Tdown</span>
+              </div>
               <p className="text-sm text-foreground/60">
                 The fastest way to download videos from anywhere
               </p>
