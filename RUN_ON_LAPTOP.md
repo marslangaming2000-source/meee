@@ -9,21 +9,25 @@
 ### If you're on Windows:
 
 **Option A (Easiest):**
+
 ```bash
 choco install yt-dlp
 ```
 
 If you don't have Chocolatey:
+
 - Go to https://chocolatey.org/install
 - Follow the installation (takes 5 minutes)
 - Then run the command above
 
 **Option B (If no Chocolatey):**
+
 1. Install Python from https://www.python.org
 2. Open Command Prompt
 3. Run: `pip install yt-dlp`
 
 **Test it works:**
+
 ```bash
 yt-dlp --version
 ```
@@ -33,21 +37,25 @@ yt-dlp --version
 ### If you're on macOS:
 
 **Option A (Easiest):**
+
 ```bash
 brew install yt-dlp
 ```
 
 If you don't have Homebrew:
+
 - Go to https://brew.sh
 - Follow installation
 - Then run the command above
 
 **Option B (If no Homebrew):**
+
 ```bash
 pip3 install yt-dlp
 ```
 
 **Test it works:**
+
 ```bash
 yt-dlp --version
 ```
@@ -57,12 +65,14 @@ yt-dlp --version
 ### If you're on Linux:
 
 **Ubuntu/Debian:**
+
 ```bash
 sudo apt update
 sudo apt install yt-dlp
 ```
 
 **Test it works:**
+
 ```bash
 yt-dlp --version
 ```
@@ -157,6 +167,7 @@ Your Y2Tdown video downloader is now running on your laptop!
 ### Where are the videos saved?
 
 They're in your project folder:
+
 ```
 your-project/downloads/
 ```
@@ -185,21 +196,26 @@ Press `Ctrl+C` in the terminal where you ran `pnpm dev`
 ## ❓ Quick Troubleshooting
 
 ### "yt-dlp is not recognized"
+
 - You didn't install yt-dlp or need to restart terminal
 - Go back to Step 1 and try again
 
 ### "Failed to fetch video info"
+
 - Video URL might be wrong
 - Video might be private/deleted
 - Try a different YouTube video first
 
 ### "Port 5173 already in use"
+
 ```bash
 PORT=3000 pnpm dev
 ```
+
 Then go to: `http://localhost:3000`
 
 ### "Module not found" error
+
 - You forgot to run `pnpm install`
 - Go back to Step 3
 
@@ -207,13 +223,13 @@ Then go to: `http://localhost:3000`
 
 ## 🎯 Quick Reference
 
-| Step | Command | Purpose |
-|------|---------|---------|
-| 1 | `yt-dlp --version` | Verify yt-dlp installed |
-| 2 | `git clone <url>` | Get the code |
-| 3 | `pnpm install` | Install dependencies |
-| 4 | `pnpm dev` | Start the app |
-| 5 | Visit `localhost:5173` | Open in browser |
+| Step | Command                | Purpose                 |
+| ---- | ---------------------- | ----------------------- |
+| 1    | `yt-dlp --version`     | Verify yt-dlp installed |
+| 2    | `git clone <url>`      | Get the code            |
+| 3    | `pnpm install`         | Install dependencies    |
+| 4    | `pnpm dev`             | Start the app           |
+| 5    | Visit `localhost:5173` | Open in browser         |
 
 ---
 

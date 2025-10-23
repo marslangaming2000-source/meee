@@ -11,43 +11,48 @@ Y2Tdown has been fully converted to use **yt-dlp** as the backend for downloadin
 ### Backend Implementation
 
 #### 1. **New Service: `server/services/ytdlpDownloader.ts`**
-   - Uses yt-dlp binary to extract video metadata
-   - Detects video platform automatically (YouTube, Instagram, TikTok, etc.)
-   - Downloads actual video files
-   - Manages downloaded files locally
-   - Auto-cleanup of old downloads
+
+- Uses yt-dlp binary to extract video metadata
+- Detects video platform automatically (YouTube, Instagram, TikTok, etc.)
+- Downloads actual video files
+- Manages downloaded files locally
+- Auto-cleanup of old downloads
 
 #### 2. **Updated Routes: `server/routes/video.ts`**
-   - `/api/video/info` - Extract video metadata using yt-dlp
-   - `/api/video/download` - Download video using yt-dlp
-   - `/api/video/file/:fileName` - Serve downloaded files
-   - `/api/video/downloads` - List all downloaded files
-   - `/api/video/health` - Check if yt-dlp is installed
+
+- `/api/video/info` - Extract video metadata using yt-dlp
+- `/api/video/download` - Download video using yt-dlp
+- `/api/video/file/:fileName` - Serve downloaded files
+- `/api/video/downloads` - List all downloaded files
+- `/api/video/health` - Check if yt-dlp is installed
 
 #### 3. **Server Setup: `server/index.ts`**
-   - Registered new API endpoints
-   - Added static file serving for downloaded videos
-   - Integrated yt-dlp routes
+
+- Registered new API endpoints
+- Added static file serving for downloaded videos
+- Integrated yt-dlp routes
 
 ### Frontend Updates
 
 #### 1. **Homepage: `client/pages/Index.tsx`**
-   - Real backend API integration
-   - "Fetch Info" button now calls actual `/api/video/info` endpoint
-   - Quality selection shows real available formats from yt-dlp
-   - "Download Video" button triggers actual `/api/video/download`
-   - Automatic browser download of completed files
-   - Toast notifications for user feedback
-   - Error handling and validation
+
+- Real backend API integration
+- "Fetch Info" button now calls actual `/api/video/info` endpoint
+- Quality selection shows real available formats from yt-dlp
+- "Download Video" button triggers actual `/api/video/download`
+- Automatic browser download of completed files
+- Toast notifications for user feedback
+- Error handling and validation
 
 ### Dependency Updates
 
 #### **New Package Added:**
-   ```json
-   {
-     "yt-dlp-exec": "^1.2.20"
-   }
-   ```
+
+```json
+{
+  "yt-dlp-exec": "^1.2.20"
+}
+```
 
 ---
 
@@ -108,6 +113,7 @@ Browser downloads to user
 yt-dlp supports **1000+ platforms**, including:
 
 ### Main Platforms:
+
 - ✅ **YouTube** - Videos, Shorts, Playlists
 - ✅ **Instagram** - Posts, Reels, Stories, IGTV
 - ✅ **TikTok** - Videos (may require workarounds)
@@ -121,6 +127,7 @@ yt-dlp supports **1000+ platforms**, including:
 - ✅ **And 900+ more platforms!**
 
 ### Supported Qualities:
+
 - 4K (2160p) - where available
 - 1080p (Full HD)
 - 720p (HD)
@@ -202,6 +209,7 @@ PING_MESSAGE=pong
 ### No API Keys Needed!
 
 Unlike the previous version, yt-dlp doesn't require:
+
 - ❌ API keys
 - ❌ External services
 - ❌ Authentication tokens
@@ -218,16 +226,19 @@ Just the yt-dlp binary!
 **Quick install:**
 
 **Windows:**
+
 ```bash
 choco install yt-dlp
 ```
 
 **macOS:**
+
 ```bash
 brew install yt-dlp
 ```
 
 **Linux:**
+
 ```bash
 sudo apt install yt-dlp
 ```
@@ -262,26 +273,26 @@ Paste a video URL and click "Fetch Info"
 
 ### Modified Files:
 
-| File | Changes |
-|------|---------|
-| `server/index.ts` | Added video routes and file serving |
-| `server/routes/video.ts` | Completely rewritten for yt-dlp |
+| File                     | Changes                                |
+| ------------------------ | -------------------------------------- |
+| `server/index.ts`        | Added video routes and file serving    |
+| `server/routes/video.ts` | Completely rewritten for yt-dlp        |
 | `client/pages/Index.tsx` | Updated API calls and download handler |
-| `package.json` | Added `yt-dlp-exec` dependency |
+| `package.json`           | Added `yt-dlp-exec` dependency         |
 
 ### New Files:
 
-| File | Purpose |
-|------|---------|
-| `server/services/ytdlpDownloader.ts` | Core yt-dlp logic |
-| `SETUP_YTDLP_LOCAL.md` | Detailed setup guide |
-| `QUICK_START.md` | Quick 5-minute setup |
-| `YTDLP_IMPLEMENTATION_SUMMARY.md` | This file |
+| File                                 | Purpose              |
+| ------------------------------------ | -------------------- |
+| `server/services/ytdlpDownloader.ts` | Core yt-dlp logic    |
+| `SETUP_YTDLP_LOCAL.md`               | Detailed setup guide |
+| `QUICK_START.md`                     | Quick 5-minute setup |
+| `YTDLP_IMPLEMENTATION_SUMMARY.md`    | This file            |
 
 ### Auto-Generated:
 
-| Folder | Purpose |
-|--------|---------|
+| Folder       | Purpose                  |
+| ------------ | ------------------------ |
 | `downloads/` | Stores downloaded videos |
 
 ---
@@ -306,14 +317,14 @@ Paste a video URL and click "Fetch Info"
 
 ### Typical Times:
 
-| Video | Quality | Duration | Time |
-|-------|---------|----------|------|
-| YouTube (10min) | 720p | ~100MB | 1-2 min |
-| TikTok | Best | ~50MB | 30-60 sec |
-| Instagram Reel | Best | ~20MB | 10-20 sec |
-| Full Movie | 1080p | ~2GB | 10-30 min |
+| Video           | Quality | Duration | Time      |
+| --------------- | ------- | -------- | --------- |
+| YouTube (10min) | 720p    | ~100MB   | 1-2 min   |
+| TikTok          | Best    | ~50MB    | 30-60 sec |
+| Instagram Reel  | Best    | ~20MB    | 10-20 sec |
+| Full Movie      | 1080p   | ~2GB     | 10-30 min |
 
-*Times vary based on internet speed and source*
+_Times vary based on internet speed and source_
 
 ---
 
@@ -339,25 +350,27 @@ Paste a video URL and click "Fetch Info"
 
 ## Troubleshooting Quick Reference
 
-| Issue | Solution |
-|-------|----------|
-| "yt-dlp is not recognized" | Install yt-dlp (Step 1) or add to PATH |
-| "Failed to fetch video info" | Update yt-dlp: `yt-dlp --upgrade` |
-| "Download seems incomplete" | Check disk space, try lower quality |
-| "Port 8080 already in use" | `PORT=3000 pnpm dev` |
-| "No formats available" | Try different video or update yt-dlp |
+| Issue                        | Solution                               |
+| ---------------------------- | -------------------------------------- |
+| "yt-dlp is not recognized"   | Install yt-dlp (Step 1) or add to PATH |
+| "Failed to fetch video info" | Update yt-dlp: `yt-dlp --upgrade`      |
+| "Download seems incomplete"  | Check disk space, try lower quality    |
+| "Port 8080 already in use"   | `PORT=3000 pnpm dev`                   |
+| "No formats available"       | Try different video or update yt-dlp   |
 
 ---
 
 ## API Endpoints Reference
 
 ### Health Check
+
 ```
 GET /api/video/health
 Response: { success: true, ytdlpInstalled: true }
 ```
 
 ### Get Video Info
+
 ```
 POST /api/video/info
 Body: { "url": "https://youtube.com/watch?v=..." }
@@ -378,6 +391,7 @@ Response: {
 ```
 
 ### Download Video
+
 ```
 POST /api/video/download
 Body: {
@@ -396,12 +410,14 @@ Response: {
 ```
 
 ### Get File
+
 ```
 GET /api/video/file/video_abc123.mp4
 Response: Binary video file (triggers browser download)
 ```
 
 ### List Downloads
+
 ```
 GET /api/video/downloads
 Response: {
@@ -418,6 +434,7 @@ Response: {
 ```
 
 ### Delete File
+
 ```
 DELETE /api/video/file/video_abc123.mp4
 Response: { success: true, message: "File deleted successfully" }
@@ -461,7 +478,7 @@ Y2Tdown is now a **fully functional, production-ready video downloader** that:
 ✅ Works offline (no API keys)  
 ✅ Runs on your laptop  
 ✅ Completely free and open source  
-✅ No external dependencies (just yt-dlp)  
+✅ No external dependencies (just yt-dlp)
 
 **Ready to get started?** See [QUICK_START.md](./QUICK_START.md)
 

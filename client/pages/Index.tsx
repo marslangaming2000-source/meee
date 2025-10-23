@@ -76,14 +76,17 @@ export default function Index() {
 
       setVideoInfo(data.data);
       if (data.data.formats && data.data.formats.length > 0) {
-        setSelectedFormat(`${data.data.formats[0].quality}-${data.data.formats[0].extension}`);
+        setSelectedFormat(
+          `${data.data.formats[0].quality}-${data.data.formats[0].extension}`,
+        );
       }
       toast({
         title: "Success",
         description: "Video information loaded successfully",
       });
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      const errorMessage =
+        err instanceof Error ? err.message : "An error occurred";
       setError(errorMessage);
       toast({
         title: "Error",
@@ -159,7 +162,8 @@ export default function Index() {
         setIsLoading(false);
       }, 500);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      const errorMessage =
+        err instanceof Error ? err.message : "An error occurred";
       setError(errorMessage);
       toast({
         title: "Error",

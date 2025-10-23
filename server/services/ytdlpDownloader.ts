@@ -55,7 +55,10 @@ export async function getVideoInfo(videoUrl: string): Promise<VideoInfo> {
 
     // Use yt-dlp to get video info in JSON format
     const command = `yt-dlp -j "${videoUrl}"`;
-    const output = execSync(command, { encoding: "utf-8", maxBuffer: 50 * 1024 * 1024 });
+    const output = execSync(command, {
+      encoding: "utf-8",
+      maxBuffer: 50 * 1024 * 1024,
+    });
     const videoData = JSON.parse(output);
 
     const platform = detectPlatform(videoUrl);
@@ -93,12 +96,14 @@ export async function getVideoInfo(videoUrl: string): Promise<VideoInfo> {
                 quality,
                 extension: format.ext,
                 size: `${sizeInMB} MB`,
-                resolution: format.height ? `${format.width}x${format.height}` : undefined,
+                resolution: format.height
+                  ? `${format.width}x${format.height}`
+                  : undefined,
                 formatId: format.format_id,
               });
             }
           }
-        }
+        },
       );
     }
 
@@ -130,7 +135,8 @@ export async function getVideoInfo(videoUrl: string): Promise<VideoInfo> {
       videoId: videoData.id,
     };
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to fetch video info";
+    const message =
+      error instanceof Error ? error.message : "Failed to fetch video info";
     throw new Error(`Failed to fetch video info: ${message}`);
   }
 }
@@ -139,7 +145,7 @@ export async function getVideoInfo(videoUrl: string): Promise<VideoInfo> {
 export async function downloadVideo(
   videoUrl: string,
   quality: string = "best",
-  extension: string = "mp4"
+  extension: string = "mp4",
 ): Promise<{ fileName: string; filePath: string; size: string }> {
   try {
     ensureDownloadDir();
@@ -182,7 +188,8 @@ export async function downloadVideo(
       size: `${sizeInMB} MB`,
     };
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to download video";
+    const message =
+      error instanceof Error ? error.message : "Failed to download video";
     throw new Error(`Failed to download video: ${message}`);
   }
 }

@@ -49,7 +49,8 @@ export const handleGetVideoInfo: RequestHandler = async (req, res) => {
       return;
     }
 
-    const message = error instanceof Error ? error.message : "Failed to fetch video info";
+    const message =
+      error instanceof Error ? error.message : "Failed to fetch video info";
     res.status(500).json({
       success: false,
       error: message,
@@ -81,7 +82,8 @@ export const handleDownloadVideo: RequestHandler = async (req, res) => {
       return;
     }
 
-    const message = error instanceof Error ? error.message : "Failed to download video";
+    const message =
+      error instanceof Error ? error.message : "Failed to download video";
     res.status(500).json({
       success: false,
       error: message,
@@ -103,7 +105,9 @@ export const handleGetFile: RequestHandler = (req, res) => {
     }
 
     // Security check - prevent directory traversal
-    const safePath = path.resolve(path.join(DOWNLOAD_DIR, path.basename(fileName)));
+    const safePath = path.resolve(
+      path.join(DOWNLOAD_DIR, path.basename(fileName)),
+    );
     const downloadDir = path.resolve(DOWNLOAD_DIR);
 
     if (!safePath.startsWith(downloadDir)) {
@@ -124,7 +128,8 @@ export const handleGetFile: RequestHandler = (req, res) => {
 
     res.download(safePath, fileName);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to download file";
+    const message =
+      error instanceof Error ? error.message : "Failed to download file";
     res.status(500).json({
       success: false,
       error: message,
@@ -147,7 +152,8 @@ export const handleListDownloads: RequestHandler = (req, res) => {
       })),
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to list downloads";
+    const message =
+      error instanceof Error ? error.message : "Failed to list downloads";
     res.status(500).json({
       success: false,
       error: message,
@@ -183,7 +189,8 @@ export const handleDeleteFile: RequestHandler = (req, res) => {
       message: "File deleted successfully",
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to delete file";
+    const message =
+      error instanceof Error ? error.message : "Failed to delete file";
     res.status(500).json({
       success: false,
       error: message,

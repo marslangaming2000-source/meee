@@ -3,6 +3,7 @@
 ## Backend (yt-dlp Integration)
 
 ### Core Backend
+
 - [x] Created `server/services/ytdlpDownloader.ts`
   - [x] `getVideoInfo()` - Extract metadata using yt-dlp
   - [x] `downloadVideo()` - Download using yt-dlp
@@ -12,6 +13,7 @@
   - [x] Platform detection (YouTube, Instagram, TikTok, etc.)
 
 ### API Routes
+
 - [x] Created/Updated `server/routes/video.ts`
   - [x] `POST /api/video/info` - Get video metadata
   - [x] `POST /api/video/download` - Download video
@@ -23,12 +25,14 @@
   - [x] Input validation with Zod
 
 ### Server Configuration
+
 - [x] Updated `server/index.ts`
   - [x] Registered all new video routes
   - [x] Added static file serving for downloads
   - [x] CORS enabled for frontend
 
 ### Downloads Management
+
 - [x] Auto-create `downloads/` folder
 - [x] Unique filename generation (UUID)
 - [x] File size calculation
@@ -40,6 +44,7 @@
 ## Frontend (React App)
 
 ### Homepage UI
+
 - [x] Updated `client/pages/Index.tsx`
   - [x] Video URL input field
   - [x] "Fetch Info" button
@@ -52,6 +57,7 @@
   - [x] Success/error feedback
 
 ### API Integration
+
 - [x] Frontend calls `POST /api/video/info`
   - [x] Validates URL format
   - [x] Shows loading state
@@ -67,6 +73,7 @@
   - [x] Resets form after download
 
 ### UX Improvements
+
 - [x] Dark mode toggle (header)
 - [x] Responsive design (mobile/desktop)
 - [x] Loading spinners
@@ -81,6 +88,7 @@
 ## Branding
 
 ### Y2Tdown Rebranding
+
 - [x] Header logo shows "Y2Tdown"
 - [x] Homepage title mentions "Y2Tdown"
 - [x] Features section: "Why Choose Y2Tdown?"
@@ -93,11 +101,13 @@
 ## Dependencies
 
 ### Added
+
 - [x] `yt-dlp-exec` - Node wrapper for yt-dlp
 - [x] `axios` - HTTP client (already there)
 - [x] `uuid` - Unique ID generation
 
 ### Already Present
+
 - [x] React 18
 - [x] React Router
 - [x] TypeScript
@@ -112,6 +122,7 @@
 ## File Structure
 
 ### Backend Files
+
 ```
 server/
 ├── index.ts                              [UPDATED]
@@ -124,6 +135,7 @@ server/
 ```
 
 ### Frontend Files
+
 ```
 client/
 ├── pages/
@@ -138,6 +150,7 @@ client/
 ```
 
 ### Project Root
+
 ```
 ├── package.json                          [UPDATED] ✅
 ├── tailwind.config.ts                    (unchanged)
@@ -156,6 +169,7 @@ client/
 ## Features Implemented
 
 ### Video Download
+
 - [x] YouTube support
 - [x] Instagram support
 - [x] TikTok support
@@ -165,6 +179,7 @@ client/
 - [x] 1000+ other platforms (via yt-dlp)
 
 ### Quality Options
+
 - [x] 4K (2160p) where available
 - [x] 1080p (Full HD)
 - [x] 720p (HD)
@@ -174,12 +189,14 @@ client/
 - [x] Worst available
 
 ### File Formats
+
 - [x] MP4 (primary)
 - [x] WebM
 - [x] MKV
 - [x] Auto-detection of available formats
 
 ### User Experience
+
 - [x] Real-time error feedback
 - [x] Loading states
 - [x] Progress indicators
@@ -190,6 +207,7 @@ client/
 - [x] Form validation
 
 ### Backend Features
+
 - [x] Automatic platform detection
 - [x] Metadata extraction (title, duration, author)
 - [x] Thumbnail extraction
@@ -243,6 +261,7 @@ client/
 ## What Works
 
 ### ✅ Fully Functional
+
 - [x] Download from YouTube
 - [x] Download from Instagram
 - [x] Download from TikTok
@@ -258,10 +277,12 @@ client/
 - [x] Toast notifications
 
 ### 🔄 Partially Implemented
+
 - [x] Download history (shows list, but not persistent)
 - [x] File management (can view/delete files via API)
 
 ### 📋 Not Yet Implemented
+
 - [ ] User accounts/authentication
 - [ ] Persistent database
 - [ ] Playlist downloads
@@ -275,6 +296,7 @@ client/
 ## Testing
 
 ### Manual Testing Done
+
 - [x] Frontend builds without errors
 - [x] Backend compiles successfully
 - [x] yt-dlp integration works
@@ -287,6 +309,7 @@ client/
 - [x] File serving works
 
 ### Browser Testing
+
 - [x] Loading indicator shows
 - [x] Error messages display
 - [x] Download button works
@@ -309,6 +332,7 @@ client/
 ## Performance
 
 ### Optimized For
+
 - [x] Fast metadata extraction
 - [x] Efficient file serving
 - [x] Low memory usage
@@ -317,6 +341,7 @@ client/
 - [x] Quick downloads
 
 ### Known Limitations
+
 - [x] Download speed limited by internet
 - [x] File size limited by disk space
 - [x] Some platforms may require authentication
@@ -327,6 +352,7 @@ client/
 ## Security
 
 ### Implemented
+
 - [x] Path traversal prevention
 - [x] Input validation with Zod
 - [x] Error messages (no sensitive info exposed)
@@ -335,6 +361,7 @@ client/
 - [x] File deletion security checks
 
 ### Notes
+
 - [x] All yt-dlp calls are safe (no code injection possible)
 - [x] Downloaded files stored locally
 - [x] No external API calls (except to video sources)
@@ -345,6 +372,7 @@ client/
 ## Deployment Ready
 
 ### Can Deploy To
+
 - [x] Your laptop (main use case)
 - [x] Own VPS/server
 - [x] Docker container
@@ -352,6 +380,7 @@ client/
 - [x] Windows server
 
 ### NOT Supported
+
 - ❌ Netlify (no yt-dlp binary)
 - ❌ Vercel (no system tools)
 - ❌ AWS Lambda (environment limitations)
@@ -362,16 +391,16 @@ client/
 
 ### Lines Changed/Added
 
-| File | Type | Lines | Status |
-|------|------|-------|--------|
-| `server/services/ytdlpDownloader.ts` | NEW | 271 | ✅ Complete |
-| `server/routes/video.ts` | REWRITTEN | 215 | ✅ Complete |
-| `server/index.ts` | UPDATED | 38 | ✅ Complete |
-| `client/pages/Index.tsx` | UPDATED | 641 | ✅ Complete |
-| `client/components/Header.tsx` | MINOR | 132 | ✅ Complete |
-| `package.json` | UPDATED | 27 | ✅ Complete |
-| Docs/Guides | NEW | 1,400+ | ✅ Complete |
-| **TOTAL** | | **2,700+** | ✅ **DONE** |
+| File                                 | Type      | Lines      | Status      |
+| ------------------------------------ | --------- | ---------- | ----------- |
+| `server/services/ytdlpDownloader.ts` | NEW       | 271        | ✅ Complete |
+| `server/routes/video.ts`             | REWRITTEN | 215        | ✅ Complete |
+| `server/index.ts`                    | UPDATED   | 38         | ✅ Complete |
+| `client/pages/Index.tsx`             | UPDATED   | 641        | ✅ Complete |
+| `client/components/Header.tsx`       | MINOR     | 132        | ✅ Complete |
+| `package.json`                       | UPDATED   | 27         | ✅ Complete |
+| Docs/Guides                          | NEW       | 1,400+     | ✅ Complete |
+| **TOTAL**                            |           | **2,700+** | ✅ **DONE** |
 
 ---
 
@@ -385,7 +414,7 @@ Your Y2Tdown video downloader is:
 ✅ **Thoroughly tested** and working  
 ✅ **No API keys needed** - just run locally  
 ✅ **Completely free** - no costs  
-✅ **Easy to extend** - clean code  
+✅ **Easy to extend** - clean code
 
 ---
 
@@ -395,11 +424,13 @@ Your Y2Tdown video downloader is:
    → Follow: [RUN_ON_LAPTOP.md](./RUN_ON_LAPTOP.md)
 
 2. Run the development server
+
    ```bash
    pnpm dev
    ```
 
 3. Open in browser
+
    ```
    http://localhost:5173
    ```

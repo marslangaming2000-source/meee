@@ -7,16 +7,19 @@ Get Y2Tdown running on your laptop in 5 minutes!
 ### 1. Install yt-dlp
 
 **Windows (Easiest):**
+
 ```bash
 choco install yt-dlp
 ```
 
 **macOS:**
+
 ```bash
 brew install yt-dlp
 ```
 
 **Linux:**
+
 ```bash
 sudo apt install yt-dlp
 ```
@@ -42,6 +45,7 @@ pnpm install
 ```
 
 Or with npm:
+
 ```bash
 npm install
 ```
@@ -55,6 +59,7 @@ pnpm dev
 ```
 
 Vite will start and show:
+
 ```
 VITE v7.1.2  ready in 345 ms
 ���  Local:   http://localhost:5173/
@@ -81,6 +86,7 @@ Go to: `http://localhost:5173`
 ## 📁 Where Are Downloads?
 
 Your videos are saved in:
+
 ```
 your-project-folder/downloads/
 ```
@@ -90,15 +96,18 @@ your-project-folder/downloads/
 ## ❓ Common Issues
 
 ### "yt-dlp is not recognized"
+
 - Make sure you installed it (step 1)
 - Restart your terminal
 
 ### "Failed to fetch video info"
+
 - Check if URL is correct
 - Update yt-dlp: `yt-dlp --upgrade`
 - Try a different video first
 
 ### "Port already in use"
+
 ```bash
 PORT=3000 pnpm dev
 ```
@@ -164,5 +173,6 @@ Then open http://localhost:5173 and start downloading! 🎉
 ---
 
 For more detailed information, see:
+
 - [Complete Setup Guide](./SETUP_YTDLP_LOCAL.md)
 - [Project Structure](./AGENTS.md)

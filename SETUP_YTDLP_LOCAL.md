@@ -5,6 +5,7 @@ This guide will help you set up the Y2Tdown video downloader to run on your lapt
 ## Prerequisites
 
 You need to have:
+
 - Node.js 18+ installed
 - npm or pnpm
 - yt-dlp installed on your system
@@ -47,6 +48,7 @@ You need to have:
    - Click Edit and add `C:\Program Files\yt-dlp\`
 
 **Verify installation:**
+
 ```bash
 yt-dlp --version
 ```
@@ -71,6 +73,7 @@ pip3 install yt-dlp
 ```
 
 **Verify installation:**
+
 ```bash
 yt-dlp --version
 ```
@@ -93,6 +96,7 @@ pip3 install yt-dlp
 ```
 
 **Verify installation:**
+
 ```bash
 yt-dlp --version
 ```
@@ -116,6 +120,7 @@ yt-dlp --version
 ## Step 3: Configure Environment Variables (Optional)
 
 1. Create or edit `.env` file in the project root:
+
    ```bash
    cp .env.example .env
    ```
@@ -137,11 +142,13 @@ pnpm dev
 ```
 
 Or with npm:
+
 ```bash
 npm run dev
 ```
 
 You should see output like:
+
 ```
 > fusion-starter@1.0.0 dev
 > vite
@@ -157,11 +164,13 @@ VITE v7.1.2  ready in 345 ms
 ## Step 5: Access the Application
 
 Open your browser and go to:
+
 ```
 http://localhost:5173
 ```
 
 or if prompted differently by Vite:
+
 ```
 http://localhost:8080
 ```
@@ -219,6 +228,7 @@ your-project/
 **Problem:** yt-dlp is not installed or not in PATH
 
 **Solution:**
+
 1. Check if installed:
    ```bash
    yt-dlp --version
@@ -236,12 +246,14 @@ your-project/
 **Problem:** Backend failed to extract video metadata
 
 **Possible causes:**
+
 - URL is invalid or video is private/restricted
 - yt-dlp is outdated
 - Video source requires authentication
 - Internet connection issue
 
 **Solution:**
+
 1. Update yt-dlp:
    ```bash
    yt-dlp --upgrade
@@ -261,18 +273,21 @@ your-project/
 **Solution:**
 
 **Windows:**
+
 ```bash
 netstat -ano | findstr :8080
 taskkill /PID <PID> /F
 ```
 
 **macOS/Linux:**
+
 ```bash
 lsof -i :8080
 kill -9 <PID>
 ```
 
 Or just use a different port:
+
 ```bash
 PORT=3000 pnpm dev
 ```
@@ -284,6 +299,7 @@ PORT=3000 pnpm dev
 **Problem:** Not enough disk space for downloads
 
 **Solution:**
+
 1. Delete old videos from `downloads/` folder
 2. Check disk space:
    - **Windows**: Right-click drive → Properties
@@ -297,6 +313,7 @@ PORT=3000 pnpm dev
 **Problem:** Video file is corrupted or incomplete
 
 **Solution:**
+
 1. Check file exists: Look in `downloads/` folder
 2. Delete incomplete file
 3. Try downloading again
@@ -309,6 +326,7 @@ PORT=3000 pnpm dev
 **Problem:** Slow internet or source limitations
 
 **Solution:**
+
 1. Check your internet speed
 2. Try a lower quality (480p or 720p)
 3. Try a different video first
@@ -341,9 +359,12 @@ Edit `server/index.ts` and add:
 
 ```typescript
 // Clean up old downloads on startup (older than 7 days)
-setInterval(() => {
-  cleanupOldDownloads(7 * 24); // 7 days
-}, 60 * 60 * 1000); // Every hour
+setInterval(
+  () => {
+    cleanupOldDownloads(7 * 24); // 7 days
+  },
+  60 * 60 * 1000,
+); // Every hour
 ```
 
 ---
@@ -372,6 +393,7 @@ pnpm build
 This creates optimized production files in the `dist/` folder.
 
 For production on your own server:
+
 ```bash
 pnpm start
 ```
@@ -452,13 +474,13 @@ yt-dlp --progress "https://video-url"
 
 ## System Requirements
 
-| Component | Minimum | Recommended |
-|-----------|---------|-------------|
-| RAM | 4GB | 8GB+ |
-| Disk Space | 5GB | 20GB+ |
-| Internet | 10 Mbps | 50+ Mbps |
-| Node.js | 18 | 20+ LTS |
-| yt-dlp | Latest | Latest |
+| Component  | Minimum | Recommended |
+| ---------- | ------- | ----------- |
+| RAM        | 4GB     | 8GB+        |
+| Disk Space | 5GB     | 20GB+       |
+| Internet   | 10 Mbps | 50+ Mbps    |
+| Node.js    | 18      | 20+ LTS     |
+| yt-dlp     | Latest  | Latest      |
 
 ---
 
